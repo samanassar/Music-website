@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> SoundTrack of a Mood 🎧</title>
+
+
+        <style>
+        *{
+            margin: 0;
+            padding:0;
+            box-sizing: border-box;
+        }
+
+        body{
+            font-family:"Trebuchet MS", sans-serif;
+            background:#211b1e;
+            color:#f7e8e5;
+            line-height:1.7;
+        }
+
+        header{
+            padding:22px 8%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            border-bottom:1px solid #49373d;
+        }
+
+        header h2{
+            color:#e9a9ad;
+            font-family:Georgia, 'Times New Roman', Times, serif;
+        }
+
+        nav a{
+            color:#f7e8e5;
+            text-decoration:none;
+            margin-left:20px;
+
+        }
+
+        nav a:hover{
+            color:#e9a9ad;
+        }
+
+        section{
+            padding: 65px 10%;
+            scroll-margin-top:20px;
+        }
+
+        .hero{
+            text-align:center;
+            padding-top:85px;
+            padding-bottom:85px;
+        }
+
+        .hero h1{
+            font-family: Georgia, serif;
+            font-size: clamp(35px, 6vw, 58px);
+            line-height:1.2;
+            margin-bottom:20px;
+        }
+
+        .hero h1 span{
+            color:#e9a9ad;
+        }
+
+        .hero p{
+            color:#d3bdc1;
+            font-size:17px;
+            margin-bottom:25px;
+        }
+
+        botton{
+            border:none;
+            border-radius:25px;
+            padding:12px 25px;
+            background:#e9a9ad;
+            color:#211b1e;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.2s;
+        }
+
+        .button:hover{
+            background:#f7d0cf;
+            transform:translateY(-2px);
+        }
+
+        h2.section-title{
+            font-family:'georgia', serif;
+            font-size:30px;
+            margin-bottom:12px;
+        }
+
+        .subtitle{
+            color:#c9b4b8;
+            margin-bottom:28px;
+        }
+
+        #moods{
+            background:#2b2226;
+        }
+
+        .mood-grid{
+            display:grid;
+            grid-template-columns:repeat(4, 1fr);
+            gap:15px;
+        }
+
+        .mood-card{
+            background:#392c32;
+            border:1px solid #59414a;
+            border-radius:16px;
+            padding :22px 10px;
+            text-align:center;
+            cursor:pointer;
+            transition:0.2s;
+        }
+
+        .mood-card:hover{
+            background:#503640;
+            transform:translateY(-4px);
+        }
+
+        .mood-card .emoji{
+            font-size:32px;
+            display:block;
+            margin-bottom:8px;
+        }
+
+        #recommendation{
+            display:none;
+            margin-top:25px;
+            padding:22px;
+            border-radius:14px;
+            background:#47313b;
+            border-left:4px solid #e9a9ad;
+        }
+
+        #recommendation h3{
+            color:#f1b8bc;
+            margin-bottom:8px;
+        }
+
+        .timeline{
+            border-left:2px solid #e9a9ad;
+            padding-left:25px;
+            margin-top:25px;
+        }
+
+        timeline.article{
+            margin-bottom:28px;
+            position:relative;
+        }
+
+        .timeline article::before{
+            content:"";
+            width:10px;
+            height:10px;
+            background:#e9a9ad;
+            border-radius:50%;
+            left:-31px;
+            top:10px;
+        }
+
+        .timeline h3{
+            color:#e9a9ad;
+        }
+
+        #facts{
+            background:#2b2226;
+            text-align:center;
+        }
+
+        #fact-text{
+            font-family:Georgia, serif;
+            font-size:21px;
+            margin: 25px auto;
+            max-width:650px;
+            min-height:75px;
+        }
+
+        footer{
+            text-align:center;
+            padding:25px;
+            color:#e9a9ad;
+            border-top:1px solid #49373d;
+            font-size:14px;
+        }
+
+        @media (max-width:650px){
+            header{
+                flex-direction:column;
+                gap:12px;
+            }
+
+            nav a{
+                margin:0 8px;
+            }
+
+            section{
+                padding:45px 7%;
+            }
+
+            .mood-grid{
+                grid-template-columns:repeat(2,1fr);
+            }
+        }
+
+
+        .youtube-btn{
+    display:inline-block;
+    margin-top:15px;
+    padding:10px 14px;
+    border-radius:25px;
+    background: #e9a9ad;
+    color:#211b1e;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.youtube-btn:hover{
+    background: #f7d0cf;
+}
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <h2>♫ mood.fm</h2>
+            <nav>
+            <a href="#home">Home</a>
+            <a href="#moods">Moods</a>
+            <a href="#history">History</a>
+            <a href="#facts">Facts</a>
+        </nav>
+    </header>
+    
+    <section class="herp" id ="home">
+        <h1> Every mood has a <span>soundtrack.</span></h1>
+        <p>a little corner of the internet for music lovers.
+            <br>Discover songs, Explore music history, follow your vibe.
+        </p>
+
+        <button onclick="goToMoods()">Find your soundtrack ♡</button>
+    </section>
+
+    <section id="moods">
+        <h2 class = "section-title">WHAT'S YOUR MOOD TODAY?</h2>
+
+        <p class ="subtitle">
+            Pick a mood and let the music do the talking!
+        </p>
+
+        <div class="mood-grid">
+            <div class="mood-card" onclick="choosMood('chill')">
+                <span class="emoji">🌙</span>
+                <h3>Chill</h3>
+                <p>Promise · Laufey</p>
+                <a class = "youtube-btn"
+                href = "https://www.youtube.com/results?search_query=Laufey+Promise">▶ Listen </a>
+            </div>
+
+            <div class="mood-card" onclick="choosMood('Happy')">
+                <span class="emoji">😄</span>
+                <h3>Happy</h3>
+                <p>Dance The Night · Dua Lipa</p>
+                <a class=" youtube-btn"
+                href="https://www.youtube.com/results?search_query=Dua+Lipa+Dance+The+Night">▶ Listen </a>
+            </div>
+
+            <div class="mood-card" onclick="choosMood('Sad')">
+                <span class="emoji">🌧️</span>
+                <h3>Melancholy</h3>
+                <p>The Night We Met · Lord Huron</p>
+                <a class = "youtube-btn"
+                href = "https://www.youtube.com/results?search_query=Lord+Huron+The+Night+We+Met">▶ Listen </a>
+            </div>
+
+            <div class="mood-card" onclick="choosMood('Focus')">
+                <span class="emoji">📚</span>
+                <h3>Focus</h3>
+                <p>Experience · Ludovico Einaudi</p>
+                <a class = "youtube-btn"
+                href = "https://www.youtube.com/results?search_query=Ludovico+Einaudi+Experience">▶ Listen</a>
+            </div>
+        </div>
+
+        <div id="recommendation" aria-live="polite">
+            <h3 id="mood-title"></h3>
+            <p id = "mood-description"></p>
+            <p id="mood-song"></p>
+        </div>
+    </section>
+
+    <section id="history">
+        <h2 class="section-title">A tiny trip through music history</h2>
+        <p class="subtitle">From ancient instruments to musicin your pocket!</p>
+
+        <div id="timeline">
+            <article>
+                <h3>40,000+ Years ago -Ancient music</h3>
+                <p> Archaeological  discoveries suggest that humans were making music with instruments long before recorded history.</p>
+            </article>
+
+            <article>
+                <h3>
+                    1982 - The CD Era
+                </h3>
+                <p>
+                    Commerial audio CD arrived, helping making digital music a part of everyday life.
+                </p>
+            </article>
+
+            <article>
+                <h3>
+                    Today - Music everyday.
+                </h3>
+                <p>
+                    Streaming services put millions of tracks within reach, from classical symphonies to bedroom pop.
+                </p>
+            </article>
+
+        </div>
+    </section>
+
+    <section id="facts">
+        <h2 class =section-title>
+            DID YOU KNOW? 🎵
+        </h2>
+        <p class ="subtitle"> Random music knowledge, because why not?</p>
+
+        <div id="fact-text">click the button to discover a music fact!</div>
+
+        <button onclick="newFact()">Tell me something random!</button>
+    </section>
+
+    <footer>
+        Made with ♡ and a little music by Sama;)
+        <br>
+        mood.fm · Your Life, Your Soundtrack.
+    </footer>
+
+    <script>
+        function goToMoods(){
+            document.getElementById("moods").scrollIntoView({behavior:"smooth"});
+        }
+
+        const moods = {
+            chill:{
+                title: "🌙 Your vibe : peaceful",
+                description: "Time to Slow down, get comfortable, and let the world be quiet for a while.",
+                Song:"Try : 'Promise' by Laufey",
+                youtube: "https://www.youtube.com/results?search_query=Laufey+Promise"
+            },
+
+            happy:{
+                title: "😄 Your vibe : Joyful",
+                description: "Today's energy is dancing around your room for absolutely no reason!.",
+                Song:"Try : 'Dance The Night' by Dua Lipa",
+                youtube:"https://www.youtube.com/results?search_query=Dua+Lipa+Dance+The+Night"
+            },
+
+            sad:{
+                title:" 🌧️ Your vibe : in your feelings",
+                description:"Sometimes a song says what you can't quite put into words",
+                song:"Try: 'The Night we met' by Lord Huron",
+                youtube:"https://www.youtube.com/results?search_query=Lord+Huron+The+Night+We+Met"
+            },
+
+            focus:{
+                title: "📚 Your vibe : focused",
+                description:"Put distractions aside and enter your own little world.",
+                song :"Try: 'Experience' by Ludovico Einaudi",
+                youtube: "https://www.youtube.com/results?search_query=Ludovico+Einaudi+Experience"
+            }
+        };
+
+        function chooseMood(mood){
+            const selected = moods[mood];
+            document.getElementById("mood-title").textContent = selected.title;
+
+            document.getElementById("mood-description").textContent = selected.description;
+
+            document.getElementById("mood-song").textContent = selected.Song;
+
+            document.getElementById("youtube-button").href = selected.youtube;
+
+            document.getElementById("recommendation").style.display = "block";
+
+        }
+
+        const facts = [
+            "The piano is a percussion instrument because its strings are struck by hummers.",
+            "a standard modern piano usually has 88 keys.",
+            "The theremin is an electronic instrument played without physically touching it.",
+            "a Mertronome helps musicians keep a steady tempo."
+        ];
+
+        let previousFact = -1;
+
+        function newFact(){
+            let index;
+
+            do{
+                index = math.floor("math.random() * facts.length ");
+            } while (index === previousFact);
+
+            previousFact = index;
+
+            document.getElememtById("fact-text").textContent = facts[index];
+        }
+    </script>
+    </body>
+
+
+</html>
